@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.incobeta.app.ConnectActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/colorPrimary">
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:lottie_fileName="wifi_wiper.json"
+            app:lottie_loop="true"
+            app:lottie_autoPlay="true"
+            android:visibility="invisible"/>
+
+        <RelativeLayout
+            android:id="@+id/connectInstructionsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/connectHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="How to Connect"
+                android:textSize="20sp"
+                android:textColor="@android:color/white"/>
+
+            <TextView
+                android:id="@+id/connectStepOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/connectHeader"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="40dp"
+                android:text="Step 1. Ensure you wifi is on."
+                android:textColor="@android:color/white"/>
+
+            <TextView
+                android:id="@+id/connectStepTwo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/connectStepOne"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="40dp"
+                android:text="Step 2. Connect to the same wifi."
+                android:textColor="@android:color/white"/>
+
+            <TextView
+                android:id="@+id/connectStepThree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/connectStepTwo"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="40dp"
+                android:text="Step 3. Press begin to find your friend."
+                android:textColor="@android:color/white"/>
+
+
+            <Button
+                android:id="@+id/beginButton"
+                android:onClick="onClick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/connectStepThree"
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"
+                android:text="Begin"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/connectTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Finding Friends to connect"
+            android:textSize="18sp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/connectTitle"
+            android:layout_marginTop="20dp"
+            android:text="0 friends found"
+            android:layout_marginLeft="16dp"/>
+
+        <Button
+            android:id="@+id/retryButton"
+            android:onClick="onClick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorPrimary"
+            android:elevation="8dp"
+            android:text="Retry"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
+
+</LinearLayout>
