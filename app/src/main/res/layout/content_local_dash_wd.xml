@@ -39,7 +39,7 @@
 
         <fragment
             android:id="@+id/fragment"
-            android:name="com.incobeta.wifidirect.PeerListFragment"
+            android:name="com.incobeta.app.PeerListFragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

@@ -80,6 +80,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/bottomConnectLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">
@@ -93,13 +94,18 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="10dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/deviceListLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/connectTitle"
             android:layout_marginTop="20dp"
-            android:text="0 friends found"
-            android:layout_marginLeft="16dp"/>
+            android:paddingLeft="16dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0 friends found"/>
+        </RelativeLayout>
 
         <Button
             android:id="@+id/retryButton"
