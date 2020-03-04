@@ -57,7 +57,7 @@ public class PeerListAdapter extends RecyclerView.Adapter<PeerListAdapter.ViewHo
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mContentView = (TextView) view;//.findViewById(R.id.content);
+            mContentView = view.findViewById(R.id.device_name);//.findViewById(R.id.content);
         }
 
         @Override

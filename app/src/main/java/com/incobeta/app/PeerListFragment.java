@@ -3,6 +3,7 @@ package com.incobeta.app;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -66,7 +67,10 @@ public class PeerListFragment extends Fragment {
             recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
+            DividerItemDecoration itemDecoration = new DividerItemDecoration(context, DividerItemDecoration.HORIZONTAL);
+
             recyclerView.setAdapter(new PeerListAdapter(devices, mListener));
+            recyclerView.addItemDecoration(itemDecoration);
         }
         return view;
     }

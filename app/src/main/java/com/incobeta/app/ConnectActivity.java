@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -49,7 +50,8 @@ public class ConnectActivity extends AppCompatActivity implements PeerListFragme
     private static final int WRITE_PERM_REQ_CODE = 19;
 
     PeerListFragment deviceListFragment;
-    View progressBarLocalDash;
+//    View progressBarLocalDash;
+    TextView emptyDeviceListTextView;
 
     WifiP2pManager wifiP2pManager;
     WifiP2pManager.Channel wifip2pChannel;
@@ -65,6 +67,7 @@ public class ConnectActivity extends AppCompatActivity implements PeerListFragme
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connect);
+//        progressBarLocalDash = findViewById(R.id.progressBarLocalDash);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setElevation(0);
@@ -82,10 +85,11 @@ public class ConnectActivity extends AppCompatActivity implements PeerListFragme
     }
 
     private void initialize() {
-
-        progressBarLocalDash = findViewById(R.id.progressBarLocalDash);
+        emptyDeviceListTextView = findViewById(R.id.emptyDeviceListText);
+//        progressBarLocalDash = findViewById(R.id.progressBarLocalDash);
 
         String myIP = Utility.getWiFiIPAddress(this);
+        System.out.println("The IP address is: "+ myIP);
         Utility.saveString(this, TransferConstants.KEY_MY_IP, myIP);
 
 //        Starting connection listener with default for now
@@ -117,11 +121,13 @@ public class ConnectActivity extends AppCompatActivity implements PeerListFragme
                 public void onFailure(int reasonCode) {
                     NotificationToast.showToast(ConnectActivity.this, "Peer discovery failure: "
                             + reasonCode);
+                    animationView.setVisibility(View.INVISIBLE);
                 }
             });
         }
         else {
             Toast.makeText(ConnectActivity.this, "Already Connected", Toast.LENGTH_SHORT).show();
+            animationView.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -249,7 +255,9 @@ public class ConnectActivity extends AppCompatActivity implements PeerListFragme
                             .getDeviceList();
                     int peerCount = (devices == null) ? 0 : devices.size();
                     if (peerCount > 0) {
-                        progressBarLocalDash.setVisibility(View.GONE);
+                        animationView.setVisibility(View.INVISIBLE);
+                        emptyDeviceListTextView.setVisibility(View.INVISIBLE);
+//                        progressBarLocalDash.setVisibility(View.GONE);
                         deviceListFragment = new PeerListFragment();
                         Bundle args = new Bundle();
                         args.putSerializable(PeerListFragment.ARG_DEVICE_LIST, devices);
@@ -354,6 +362,9 @@ public class ConnectActivity extends AppCompatActivity implements PeerListFragme
         ArrayList<DeviceDTO> deviceDTOs = new ArrayList<>();
 
         List<WifiP2pDevice> devices = (new ArrayList<>());
+        if (devices.size() > 0) {
+            emptyDeviceListTextView.setVisibility(View.INVISIBLE);
+        }
         devices.addAll(peerList.getDeviceList());
         for (WifiP2pDevice device : devices) {
             DeviceDTO deviceDTO = new DeviceDTO();
@@ -366,11 +377,14 @@ public class ConnectActivity extends AppCompatActivity implements PeerListFragme
         }
 
 
-        progressBarLocalDash.setVisibility(View.GONE);
+//        progressBarLocalDash.setVisibility(View.GONE);
         deviceListFragment = new PeerListFragment();
         Bundle args = new Bundle();
         args.putSerializable(PeerListFragment.ARG_DEVICE_LIST, deviceDTOs);
         deviceListFragment.setArguments(args);
+
+        animationView.setVisibility(View.INVISIBLE);
+        emptyDeviceListTextView.setVisibility(View.INVISIBLE);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.deviceListLayout, deviceListFragment);
